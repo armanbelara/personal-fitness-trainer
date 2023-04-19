@@ -15,11 +15,11 @@ app.get('/programs/:id/exercises', (req, res) => {
 
 app.post('/programs/:id/exercises', (req, res) => {
   const exerciseId = `prx_${randomBytes(4).toString('hex')}`;
-  const { sets, reps, weight, unit, duration, rest_time, intensity } = req.body;
+  const { name, sets, reps, weight, unit, duration, rest_time, intensity } = req.body;
 
   const exercises = exercisesByProgramId[req.params.id] || [];
 
-  exercises.push({ id: exerciseId, sets, reps, weight, unit, duration, rest_time, intensity });
+  exercises.push({ id: exerciseId, name, sets, reps, weight, unit, duration, rest_time, intensity });
   exercisesByProgramId[req.params.id] = exercises;
 
   res.status(201).send(exercises);

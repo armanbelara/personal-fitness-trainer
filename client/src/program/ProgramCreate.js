@@ -19,7 +19,7 @@ const ProgramCreate = () => {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
+        <div className="mb-3 form-group">
           <label>Name</label>
           <input
             className="form-control"
@@ -27,7 +27,7 @@ const ProgramCreate = () => {
             value={name}
           />
         </div>
-        <div className="form-group">
+        <div className="mb-3 form-group">
           <label>Notes</label>
           <textarea
             className="form-control"
@@ -35,7 +35,7 @@ const ProgramCreate = () => {
             value={notes}
           />
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     </div>
   );
