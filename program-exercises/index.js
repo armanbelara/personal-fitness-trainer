@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { randomBytes } = require('crypto');
 const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,16 +14,31 @@ app.get('/programs/:id/exercises', (req, res) => {
   res.send(exercisesByProgramId[req.params.id] || []);
 });
 
-app.post('/programs/:id/exercises', (req, res) => {
+app.post('/programs/:id/exercises', async (req, res) => {
   const exerciseId = `prx_${randomBytes(4).toString('hex')}`;
-  const { name, sets, reps, weight, unit, duration, rest_time, intensity } = req.body;
+  const { name, sets, reps, weight, unit } = req.body;
 
   const exercises = exercisesByProgramId[req.params.id] || [];
 
-  exercises.push({ id: exerciseId, name, sets, reps, weight, unit, duration, rest_time, intensity });
+  exercises.push({ id: exerciseId, name, sets, reps, weight, unit });
   exercisesByProgramId[req.params.id] = exercises;
 
+  await axios.post('http://localhost:4005/events',{
+    type: 'ProgramExerciseCreated',
+    data: {
+      id: exerciseId,
+      programId: req.params.id,
+      name, sets, reps, weight, unit
+    }
+  });
+
   res.status(201).send(exercises);
+});
+
+app.post('/events', (req, res) => {
+  console.log("Event Received:", req.body.type);
+
+  res.send({});
 });
 
 app.listen(4001, () => {
