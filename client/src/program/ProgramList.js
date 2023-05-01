@@ -7,7 +7,7 @@ const ProgramList = () => {
   const [programs, setPrograms] = useState({});
 
   const fetchPrograms = async () => {
-    const res = await axios.get('http://localhost:4000/programs');
+    const res = await axios.get('http://localhost:4002/programs');
 
     setPrograms(res.data);
   };
@@ -26,7 +26,7 @@ const ProgramList = () => {
         <div className="card-body">
           <h3>{program.name}</h3>
           <p>{program.notes}</p>
-          <ProgramExerciseList programId={program.id} />
+          <ProgramExerciseList exercises={program.exercises} />
           <ProgramExerciseCreate programId={program.id} />
         </div>
       </div>

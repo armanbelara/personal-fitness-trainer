@@ -1,19 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
-const ProgramExerciseList = ({ programId }) => {
-  const [exercises, setExercises] = useState([]);
-
-  const fetchExercises = async () => {
-    const res = await axios.get(`http://localhost:4001/programs/${programId}/exercises`);
-
-    setExercises(res.data);
-  };
-  
-  useEffect(() => {
-    fetchExercises();
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const ProgramExerciseList = ({ exercises }) => {
 
   const renderedExercises = exercises.map(exercise => {
     return (
