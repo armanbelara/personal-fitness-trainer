@@ -40,7 +40,7 @@ const ProgramExerciseCreate = ({ programId }) => {
         
         <div className="mb-3 form-group">
           <label>Unit of Measurement</label>
-          <select class="form-select" {...register("unit")}>
+          <select className="form-select" {...register("unit")}>
             <option>kg</option>
             <option>lbs</option>
           </select>
