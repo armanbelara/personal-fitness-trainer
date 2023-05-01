@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "ba7d838f-a6c0-406c-b13e-75568e74cb3b",
+		"name": "Personal Fitness Trainer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18876339"
+	},
+	"item": [
+		{
+			"name": "Programs",
+			"item": [
+				{
+					"name": "Get programs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_programs_api}}/programs",
+							"host": [
+								"{{base_url_programs_api}}"
+							],
+							"path": [
+								"programs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create program",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"testing\",\n    \"notes\": \"testing notes\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_programs_api}}/programs",
+							"host": [
+								"{{base_url_programs_api}}"
+							],
+							"path": [
+								"programs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Program Exercises",
+			"item": [
+				{
+					"name": "Get Exercises by Program",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_program_exercises_api}}/programs/:id/exercises",
+							"host": [
+								"{{base_url_program_exercises_api}}"
+							],
+							"path": [
+								"programs",
+								":id",
+								"exercises"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Exercise for Program",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sets\": 3,\n    \"reps\": 10,\n    \"weight\": 0,\n    \"unit\": \"kg\",\n    \"duration\": 1681728711,\n    \"rest_time\": 1681728720,\n    \"intensity\": \"hard\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_program_exercises_api}}/programs/:id/exercises",
+							"host": [
+								"{{base_url_program_exercises_api}}"
+							],
+							"path": [
+								"programs",
+								":id",
+								"exercises"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "prg_040f9b2f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
