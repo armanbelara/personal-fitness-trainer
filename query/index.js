@@ -22,10 +22,10 @@ app.post('/events', (req, res) => {
   }
 
   if (type === "ProgramExerciseCreated") {
-    const { id, programId, name, sets, reps, weight, unit } = data;
+    const { id, programId, name, sets, reps, weight, unit, status } = data;
 
     const program = programs[programId];
-    program.exercises.push({ id, name, sets, reps, weight, unit });
+    program.exercises.push({ id, name, sets, reps, weight, unit, status });
   }
 
   console.log(programs);

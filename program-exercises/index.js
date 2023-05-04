@@ -20,7 +20,7 @@ app.post('/programs/:id/exercises', async (req, res) => {
 
   const exercises = exercisesByProgramId[req.params.id] || [];
 
-  exercises.push({ id: exerciseId, name, sets, reps, weight, unit });
+  exercises.push({ id: exerciseId, name, sets, reps, weight, unit, status: 'pending' });
   exercisesByProgramId[req.params.id] = exercises;
 
   await axios.post('http://localhost:4005/events',{
@@ -28,7 +28,8 @@ app.post('/programs/:id/exercises', async (req, res) => {
     data: {
       id: exerciseId,
       programId: req.params.id,
-      name, sets, reps, weight, unit
+      name, sets, reps, weight, unit,
+      status: 'pending'
     }
   });
 
