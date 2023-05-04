@@ -36,8 +36,29 @@ app.post('/programs/:id/exercises', async (req, res) => {
   res.status(201).send(exercises);
 });
 
-app.post('/events', (req, res) => {
+app.post('/events', async (req, res) => {
   console.log("Event Received:", req.body.type);
+
+  const { type, data } = req.body;
+
+  if (type === 'ProgramExerciseModerated') {
+    const { programId, id, name, sets, reps, weight, unit, status } = data;
+
+    const exercises = exercisesByProgramId[programId];
+
+    const exercise = exercises.find(exercise => {
+      return exercise.id === id;
+    });
+
+    exercise.status = status;
+
+    await axios.post('http://localhost:4005/events', {
+      type: 'ProgramExerciseUpdated',
+      data: {
+        programId, id, name, sets, reps, weight, unit, status
+      }
+    })
+  }
 
   res.send({});
 });

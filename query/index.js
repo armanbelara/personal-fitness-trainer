@@ -28,6 +28,22 @@ app.post('/events', (req, res) => {
     program.exercises.push({ id, name, sets, reps, weight, unit, status });
   }
 
+  if (type === "ProgramExerciseUpdated") {
+    const { id, programId, name, sets, reps, weight, unit, status } = data;
+
+    const program = programs[programId];
+    const exercise = program.exercises.find(exercise => {
+      return exercise.id === id;
+    });
+
+    exercise.name = name;
+    exercise.sets = sets;
+    exercise.reps = reps;
+    exercise.unit = unit;
+    exercise.weight = weight;
+    exercise.status = status;
+  }
+
   console.log(programs);
 
   res.send({});
